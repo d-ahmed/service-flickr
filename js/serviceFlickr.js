@@ -27,6 +27,7 @@ $(document).ready(function(){
 
 	$('#recherche').submit(function(e){
 		e.preventDefault();
+<<<<<<< HEAD
 		if ($("#commune").val()) {
 			$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags="+$("#commune").val()+"&tagmode=any&format=json&jsoncallback=?",
 	        function(data){
@@ -40,5 +41,20 @@ $(document).ready(function(){
 	        });
 		}
 		
+=======
+		$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags="+$("#commune").val()+"&tagmode=any&format=json&jsoncallback=?",
+        function(data){
+        	console.log(data);
+        	$(".col-sm-6").remove();
+        	$.each(data.items, function(i,item){
+        		$("<div/>",{class:"col-sm-6 col-md-4", id:""+i}).appendTo($(".row"));
+        		$("<div/>",{class:"thumbnail",}).appendTo($("#"+i));
+        		$("<img/>").attr("src", item.media.m).appendTo($("#"+i).find(".thumbnail"));
+        		$("<div/>",{class:"caption"}).appendTo($("#"+i).find(".thumbnail"));
+
+            if ( i == $("#nbPhotos").val()) return false;
+          });
+        });
+>>>>>>> c73519b05927ce3fba1b5bbd76829ce535add6ec
 	})
 })
