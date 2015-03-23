@@ -1,0 +1,13 @@
+.test {
+	background-color:#22A7F0;
+	border-color:#22A7F0;
+	color:black;
+}
+
+.navbar .nav > li > a {
+    color:#d6d6d6;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #d6d6d6;
+}
