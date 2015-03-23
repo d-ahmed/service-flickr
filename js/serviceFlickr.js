@@ -10,12 +10,12 @@ $(document).ready(function(){
 				data:{"commune":$("#commune").val()},
 				success:function(data){
 					commune=[];
-					if(data){
+					if(data) {
 						$.each(data,function(i){
 							commune[i]=data[i].Ville;
 						});
 						response(commune);
-					}					
+					}				
 				},
 	
 				error:function(data, status, err){
