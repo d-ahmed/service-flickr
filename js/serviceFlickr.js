@@ -8,13 +8,9 @@ $(document).ready(function(){
 				dataType:'json',
 				data:{"commune":$("#commune").val()},
 				success:function(data){
-<<<<<<< HEAD
 					var commune=[];
 					if(data){
-=======
-					commune=[];
-					if(data) {
->>>>>>> ff5c18fc9f2df34246f373a9e496f6f49b8ce01e
+
 						$.each(data,function(i){
 							commune[i]=data[i].Ville;
 						});
