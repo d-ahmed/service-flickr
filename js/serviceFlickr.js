@@ -8,13 +8,9 @@ $(document).ready(function(){
 				dataType:'json',
 				data:{"commune":$("#commune").val()},
 				success:function(data){
-<<<<<<< HEAD
+
 					var commune=[];
 					if(data){
-=======
-					commune=[];
-					if(data) {
->>>>>>> ff5c18fc9f2df34246f373a9e496f6f49b8ce01e
 						$.each(data,function(i){
 							commune[i]=data[i].Ville;
 						});
@@ -35,9 +31,11 @@ $(document).ready(function(){
 		$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags="+$("#commune").val()+"&tagmode=any&format=json&jsoncallback=?",
         function(data){
         	console.log(data);
-          $.each(data.items, function(i,item){
+        	$.each(data.items, function(i,item){
 
-            $("<img/>").attr("src", item.media.m).appendTo(".container");
+        	$("<img/>").attr("src", item.media.m).appendTo(".thumbnail");
+            $("<h3/>").text(items.title).appendTo($("<div/>",{class:"caption"}));
+
             if ( i == 6 ) return false;
           });
         });
