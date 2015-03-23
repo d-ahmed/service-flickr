@@ -8,9 +8,9 @@ $(document).ready(function(){
 				dataType:'json',
 				data:{"commune":$("#commune").val()},
 				success:function(data){
+
 					var commune=[];
 					if(data){
-
 						$.each(data,function(i){
 							commune[i]=data[i].Ville;
 						});
@@ -31,10 +31,14 @@ $(document).ready(function(){
 		$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags="+$("#commune").val()+"&tagmode=any&format=json&jsoncallback=?",
         function(data){
         	console.log(data);
-          $.each(data.items, function(i,item){
+        	$(".col-sm-6").remove();
+        	$.each(data.items, function(i,item){
+        		$("<div/>",{class:"col-sm-6 col-md-4", id:""+i}).appendTo($(".row"));
+        		$("<div/>",{class:"thumbnail",}).appendTo($("#"+i));
+        		$("<img/>").attr("src", item.media.m).appendTo($("#"+i).find(".thumbnail"));
+        		$("<div/>",{class:"caption"}).appendTo($("#"+i).find(".thumbnail"));
 
-            $("<img/>").attr("src", item.media.m).appendTo(".container");
-            if ( i == 6 ) return false;
+            if ( i == $("#nbPhotos").val()) return false;
           });
         });
 	})
