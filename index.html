@@ -10,22 +10,19 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	</head>
 	<body>
+		<h1>Service Flickr</h1>
 		<div class="container documents">
-			<form id="recherche">
-				<div class="row">
-	  				<div class="col-md-3">
-	    				<div class="input-group">
-	      					<input id="commune" type="text" class="form-control" placeholder="Nom de commune">
-	    					<span class="input-group-btn">
-	        					<button class="btn btn-default" type="button">Chercher</button>
-	     					</span>
 
-	    				</div>
-	    				Nombre maximal de photos à afficher<input type="number" class="form-control">
-	    				
-  					</div>
-				</div>
-			</form>
+			<form class="col-lg-3" id="recherche">
+		    	<div class="form-group">
+		      		<input type="text" class="form-control input-lg" placeholder="Nom de commune" id="commune">	
+		    	</div>
+		    	<div class="form-group">
+		    		<input type="number" class="form-control input-lg" >
+		    		<span class="pull-right">Nombre de photos à afficher</span>
+		    		<button class="btn btn-info" type="submit">Chercher</button>
+		    	</div>
+			</form>	
 		</div>
 	
 		<div class="footer">
