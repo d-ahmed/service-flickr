@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	var commune = [];
 	$("#commune").autocomplete({
 		minLength:3,
 		source: function(request, response){
@@ -9,7 +8,7 @@ $(document).ready(function(){
 				dataType:'json',
 				data:{"commune":$("#commune").val()},
 				success:function(data){
-					commune=[];
+					var commune=[];
 					if(data){
 						$.each(data,function(i){
 							commune[i]=data[i].Ville;
@@ -26,7 +25,16 @@ $(document).ready(function(){
 	});
 	
 
-	$('.recherche').submit(function(e){
+	$('#recherche').submit(function(e){
 		e.preventDefault();
+		$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags="+$("#commune").val()+"&tagmode=any&format=json&jsoncallback=?",
+        function(data){
+        	console.log(data);
+          $.each(data.items, function(i,item){
+
+            $("<img/>").attr("src", item.media.m).appendTo(".container");
+            if ( i == 6 ) return false;
+          });
+        });
 	})
 })
