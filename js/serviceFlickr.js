@@ -60,7 +60,7 @@ $(document).ready(function(){
 				*/
 
 				$("#modaltest").remove();
-				$("<div/>",{id:'modaltest',class:'col-md-9 col-md-push-3'}).css({'display':'inline-block','float':'left','position':'absolute','z-index': '100', 'top':'60%',"background-color":"#D2D7D3"}).appendTo($(this).parent());
+				$("<div/>",{id:'modaltest',class:'col-md-9 col-md-push-3'}).css({'display':'inline-block','float':'left','position':'absolute','z-index': '100', 'top':-($(this).parent().css('bottom')),"background-color":"#D2D7D3"}).appendTo($(this).parent());
 				$("<h4/>").text(data.items[i].title).appendTo("#modaltest");
         		$("<p/>").text(data.items[i].author).appendTo($("#modaltest"));
         		$( "#modaltest" ).effect( "slide", "slow" );
