@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$("#commune").autocomplete({
+	/*$("#commune").autocomplete({
 		minLength:3,
 		source: function(request, response){
 			$.ajax({
@@ -23,7 +23,7 @@ $(document).ready(function(){
 				}
 			})
 		},
-	});
+	});*/
 	
 
 	$('#recherche').submit(function(e){
@@ -32,14 +32,30 @@ $(document).ready(function(){
         function(data){
         	console.log(data);
         	$(".col-sm-6").remove();
-        	$.each(data.items, function(i,item){
-        		$("<div/>",{class:"col-sm-6 col-md-4", id:""+i}).appendTo($(".row"));
-        		$("<div/>",{class:"thumbnail",}).appendTo($("#"+i));
-        		$("<img/>").attr("src", item.media.m).appendTo($("#"+i).find(".thumbnail"));
-        		$("<div/>",{class:"caption"}).appendTo($("#"+i).find(".thumbnail"));
+        	// Création de l'affichage des images
+        	if(parseInt($("#nbPhotos").val())=="NaN"){
+        		alert("nbPhotos");
+        	}else{
+	        	$.each(data.items, function(i,item){
 
-            if ( i == $("#nbPhotos").val()) return false;
-          });
+	        		if ( i == $("#nbPhotos").val()) return false;
+
+	        		$("<div/>",{class:"col-sm-6 col-md-4", id:""+i}).appendTo($("#row2"));
+	        		$("<div/>",{class:"thumbnail",}).appendTo($("#"+i));
+	        		$("<img/>").attr("src", item.media.m).appendTo($("#"+i).find(".thumbnail"));
+	        		$("<img/>").attr("src", item.media.m).appendTo($("#carousel").find(".wrapper"));
+	        		//$("<div/>",{class:"caption"}).appendTo($("#"+i).find(".thumbnail"));
+	        	});
+        	}
+        	
+        	// Evenement pour ouvrir la fanetre modale
+        	$("img").click(function(){
+				alert("fenetre modale");
+			});
         });
-	})
+	});
+
+	$(function() {
+		$( "#datepicker" ).datepicker();
+	});
 })
