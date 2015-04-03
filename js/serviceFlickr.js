@@ -25,36 +25,24 @@ $(document).ready(function(){
 	});
 	
 
-	$('#recherche').submit(function(e){
+	$('#recherche').submit(function(e) {
 		e.preventDefault();
-<<<<<<< HEAD
-		if ($("#commune").val()) {
-			$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags="+$("#commune").val()+"&tagmode=any&format=json&jsoncallback=?",
-	        function(data){
-	        	console.log(data);
-	        	$.each(data.items, function(i,item) {
-	        		$("<img/>").attr("src", item.media.m).appendTo(".thumbnail");
-	            	$("<h3/>").text(items.title).appendTo($("<div/>",{class:"caption"}));
-
-	            if ( i == 6 ) return false;
-	          });
-	        });
-		}
-		
-=======
 		$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags="+$("#commune").val()+"&tagmode=any&format=json&jsoncallback=?",
-        function(data){
+        function(data) {
         	console.log(data);
         	$(".col-sm-6").remove();
-        	$.each(data.items, function(i,item){
+        	$.each(data.items, function(i,item) {
         		$("<div/>",{class:"col-sm-6 col-md-4", id:""+i}).appendTo($(".row"));
-        		$("<div/>",{class:"thumbnail",}).appendTo($("#"+i));
-        		$("<img/>").attr("src", item.media.m).appendTo($("#"+i).find(".thumbnail"));
-        		$("<div/>",{class:"caption"}).appendTo($("#"+i).find(".thumbnail"));
-
-            if ( i == $("#nbPhotos").val()) return false;
+        		$("<div/>",{class:"thumbnail"}).appendTo($("#"+i));
+        		$("<img/>", {onclick:"test"}).attr("src", item.media.m).appendTo($("#"+i).find(".thumbnail"));
+        		/*$("<div/>",{class:"caption"}).text(item.title).appendTo($("#"+i).find(".thumbnail"));*/
+        		$("<h4/>").text(item.title).appendTo($("<div/>",{class:"caption"})).appendTo($("#"+i).find(".thumbnail"));
+            	if ( i == $("#nbPhotos").val()-1) return false;
           });
         });
->>>>>>> c73519b05927ce3fba1b5bbd76829ce535add6ec
 	})
+	function test() {
+    	alert('test');
+    	return true;
+    }
 })
