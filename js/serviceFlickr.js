@@ -35,12 +35,39 @@ $(document).ready(function(){
         	$.each(data.items, function(i,item) {
         		$("<div/>",{class:"col-sm-6 col-md-4", id:""+i}).appendTo($(".row"));
         		$("<div/>",{class:"thumbnail"}).appendTo($("#"+i));
-        		$("<img/>").attr("src", item.media.m).appendTo($("#"+i).find(".thumbnail"));      		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+        		$("<img/>").attr("src", item.media.m).appendTo($("#"+i).find(".thumbnail"));     		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
             	if ( i == $("#nbPhotos").val()-1) return false;
-          });
+         	});
 
-        	$("img").click(function(){
-				alert("fenetre modale");
+        	$("img").click(function() {
+        		/* Création et affichage du modal */
+
+        		i = $(this).parent().parent().attr('id');
+        		$(".mymodal").remove();
+
+        		// La croix
+        		$("<div/>", {class:"alert alert-default mymodal", "role":"alert"}).appendTo($("#modal"));
+        		$("<button/>", {type:"button", class:"close"}).appendTo($(".mymodal"));
+        		$("<span/>", {"aria-hiden":"true"}).html("&times;").appendTo($(".mymodal").find("button"));
+        		
+				$( ".mymodal" ).effect( "slide", "slow" );
+				
+        		// L'image
+        		$(this).clone().appendTo($(".mymodal"));
+        		$("<h4/>").text(data.items[i].title).appendTo(".mymodal");
+        		$("<p/>").text(data.items[i].author).appendTo($(".mymodal"));
+        		$("<p/>").text("Photo prise le "+data.items[i].date_taken).appendTo($(".mymodal"));
+
+
+        		/* Opacité */
+				$("#bg").css({
+					'opacity':'0.4',
+				});
+
+				$(".close").click(function() {
+					$("#bg").css('opacity', 1);
+					$( ".mymodal" ).effect( "drop", "slow" );
+				});
 			});
         });
 	})

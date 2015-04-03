@@ -27,6 +27,16 @@
 
 /* style modal */
 .mymodal {
-	display:none;
+	background-color: #D2D7D3;
+	width: 440px;
+    height: 400px;
+    z-index: 100;
+  	position: absolute;
+  	top:20%;
+  	left:35%;
+}  	
+
+body {
+	z-index:99;
 }
 
