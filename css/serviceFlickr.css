@@ -1,7 +1,7 @@
-.test {
+/* style pour navbar */
+.mynav {
 	background-color:#22A7F0;
 	border-color:#22A7F0;
-	color:black;
 }
 
 .navbar .nav > li > a {
@@ -12,6 +12,7 @@
     color: #d6d6d6;
 }
 
+<<<<<<< HEAD
 .row{
 	margin-top:50px; 
 }
@@ -24,3 +25,17 @@ header{
 img{
 	cursor: pointer;
 }
+=======
+/* style de l'affichage des images */
+.thumbnail{
+    width: 242px;
+    height: 210px;
+    overflow: auto;
+}
+
+.thumbnail img{
+	width: 240px;
+    height: 200px;
+    overflow: auto;
+}
+>>>>>>> abd79eaa90a90ea489d1353b0f993150e8ee5c0a
