@@ -38,22 +38,42 @@
 			</nav>
 		</header>
 
-		<div class="container documents">
-			<center id="bg">
-				<form class="form-inline" role="form" id="recherche">
+		
+			<form class="form-vertical col-md-3" role="form" id="recherche">
+			    <div class="form-group">
+			      	<input type="text" class="form-control input-xs" placeholder="Nom de commune" id="commune">	
+			    </div>
+			    <div class="form-group">
+			    	<label for="nbPhotos">Nombre de photos à afficher : </label>
+			    	<input type="number" class="form-control input-xs" id="nbPhotos">
+			    	<label for="files">Trier par : </label>
+			    	<select id="tri" class="form-control input-xs">
+					<optgroup label="Auteur">
+						<option value="auteur_az">Auteur : A-Z</option>
+						<option value="auteur_za">Auteur : Z-A</option>
+					</optgroup>
+					<optgroup label="Nom photo">
+						<option value="photo_az">Nom photo : A-Z</option>
+						<option value="photo_za">Nom photo : Z-A</option>
+					</optgroup>
+					<optgroup label="Date de publication">
+						<option value="recent">Plus récents</option>
+						<option value="ancien">Moins récents</option>
+					</optgroup>
+				</select>
+					<label for="date">Date: </label><input type="text" class="form-control input-xs" id="datepicker"></p>
+					<br>
+			    	<button class="btn btn-info" type="submit">Chercher</button>
+			    </div>
+				
 
-			    	<div class="form-group">
-			      		<input type="text" class="form-control input-lg" placeholder="Nom de commune" id="commune">	
-			    	</div>
-			    	<div class="form-group">
+				<!-- Tri -->
+				
+			</form>
+		
 
-			    		<label for"nbPhotos">Nombre de photos à afficher : </label>
-			    		<input type="number" class="form-control input-lg" id="nbPhotos">
-
-			    		<button class="btn btn-info" type="submit">Chercher</button>
-			    	</div>
-
-				</form>	
+		<div class="container documents col-md-9">	
+			<center id="bg">	
 				<div class="row"></div>	
 			</center>
 

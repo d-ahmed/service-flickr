@@ -29,18 +29,79 @@ $(document).ready(function(){
 		e.preventDefault();
 		$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags="+$("#commune").val()+"&tagmode=any&format=json&jsoncallback=?",
         function(data) {
-        	console.log(data);
+        	//console.log(data.items);
         	$(".col-sm-6").remove();
 
-        	/*$.each(data.items, function(i,item) {
+        	
+        	
+        	if ($("#tri").val() == "auteur_az") {
+        		data.items.sort(function(a,b){
+        			var a1 = a.author.toLowerCase();
+        			var b1 = b.author.toLowerCase();
+        			return ((a1<b1)?-1:((a1>b1)?1:0));
+        		});
+        	}
+        	else if($("#tri").val() == "auteur_za") {
+        		data.items.sort(function(a,b){
+        			var a1 = a.author.toLowerCase();
+        			var b1 = b.author.toLowerCase();
+        			return ((a1>b1)?-1:((a1<b1)?1:0));
+        		});
+        	}
+        	else if($("#tri").val() == "photo_az") {
+        		data.items.sort(function(a,b){
+        			var a1 = a.title.toLowerCase();
+        			var b1 = b.title.toLowerCase();
+        			return ((a1<b1)?-1:((a1>b1)?1:0));
+        		});
+        	}
+        	else if($("#tri").val() == "photo_za") {
+        		data.items.sort(function(a,b) {
+        			var a1 = a.title.toLowerCase();
+        			var b1 = b.title.toLowerCase();
+        			return ((a1>b1)?-1:((a1<b1)?1:0));
+        		});
+        	}
+        	else if($("#tri").val() == "recent") {
+        		data.items.sort(function(a,b){
+        			var a1 = Date.parse(a.published);
+        			var b1 = Date.parse(b.published);
+        			return ((a1<b1)?-1:((a1>b1)?1:0));
+        		});
+        	}
+        	else {
+        		data.items.sort(function(a,b){
+        			var a1 = Date.parse(a.published);
+        			var b1 = Date.parse(b.published);
+        			return ((a1>b1)?-1:((a1<b1)?1:0));
+        		});
+        	}
+			
+        	
+
+
+        	if ($("#datepicker").val()) {
+        		var date = $("#datepicker").val().split("/").reverse();
+        		data.items = jQuery.grep(data.items, function(item) {
+        			return Date.parse(item.published)>Date.parse(date[0]+"-"+date[2]+"-"+date[1]);
+        		});
+        	}
+        	console.log(data.items);
+
+        	
+
+        	//console.log(tri);
+
+        	$.each(data.items, function(i,item) {
         		$("<div/>",{class:"col-sm-6 col-md-4", id:""+i}).appendTo($(".row"));
         		$("<div/>",{class:"thumbnail"}).appendTo($("#"+i));
         		$("<img/>").attr("src", item.media.m).appendTo($("#"+i).find(".thumbnail"));     		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
             	
             	if ( i == $("#nbPhotos").val()-1) return false;
             	
-         	});*/
-         	var nbPhotos = $("#nbPhotos").val();
+         	});
+
+         	var nbPhotos = parseInt($("#nbPhotos").val());
          	var nbPhotosTotal = data.items.length;
 
             	if (nbPhotosTotal > nbPhotos) {
@@ -48,32 +109,33 @@ $(document).ready(function(){
             		$("<nav/>", {class:"pages"}).appendTo($("#bg"));
             		$("<ul/>", {class:"pagination"}).appendTo($(".pages"));
             		
-            		if (nbPhotos == 1) {
+            		if (nbPhotosTotal%nbPhotos == 0) {
             			var nbPages = Math.floor(nbPhotosTotal/nbPhotos);
             		}
             		else {
             			var nbPages = Math.floor(nbPhotosTotal/nbPhotos)+1;
             		}
 
-            		var debut = 0;
             		for (var i=0; i<nbPages; i++) {
             			$("<li/>", {id:"li"+i}).appendTo($(".pagination"));
             			$("<a/>", {href:"#"}).text(""+(i+1)).appendTo("#li"+i);
+            			
             			$("#li"+i).click(function(){
             				$(".col-sm-6").remove();
-            				for(var i=debut; i<=debut+nbPhotos; i++) {
-            					$("<div/>",{class:"col-sm-6 col-md-4", id:""+i}).appendTo($(".row"));
-        						$("<div/>",{class:"thumbnail"}).appendTo($("#"+i));
-        						$("<img/>").attr("src", data.items[i].media.m).appendTo($("#"+i).find(".thumbnail"));   
-            				}
+            				var page = $(this).index();
+            				var debut = page*nbPhotos;
+            				var fin = debut + nbPhotos;
+
+            				for (var j=debut; j<fin; j++) {
+            					if(j==nbPhotosTotal)break;
+            					$("<div/>",{class:"col-sm-6 col-md-4", id:""+j}).appendTo($(".row"));
+        						$("<div/>",{class:"thumbnail"}).appendTo($("#"+j));
+        						$("<img/>").attr("src", data.items[j].media.m).appendTo($("#"+j).find(".thumbnail"));
+            				}	
             			});
-            			debut = debut+nbPhotos;
+            			
             		}
             	}
-
-
-		
-
 
         	$("img").click(function() {
         		/* Création et affichage du modal */
@@ -114,5 +176,9 @@ $(document).ready(function(){
 			});
         });
 	})
+
+	$(function() {
+		$( "#datepicker" ).datepicker();
+	});
 })
 
