@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$("#commune").autocomplete({
+	/*$("#commune").autocomplete({
 		minLength:3,
 		source: function(request, response){
 			$.ajax({
@@ -22,7 +22,7 @@ $(document).ready(function(){
 				}
 			})
 		},
-	});
+	});*/
 	
 
 	$('#recherche').submit(function(e) {
@@ -43,7 +43,7 @@ $(document).ready(function(){
         		/* Création et affichage du modal */
 
         		i = $(this).parent().parent().attr('id');
-        		$(".mymodal").remove();
+        		/*$(".mymodal").remove();
 
         		// La croix
         		$("<div/>", {class:"alert alert-default mymodal", "role":"alert"}).appendTo($("#modal"));
@@ -57,17 +57,24 @@ $(document).ready(function(){
         		$("<h4/>").text(data.items[i].title).appendTo(".mymodal");
         		$("<p/>").text(data.items[i].author).appendTo($(".mymodal"));
         		$("<p/>").text("Photo prise le "+data.items[i].date_taken).appendTo($(".mymodal"));
+				*/
 
+				$("#modaltest").remove();
+				$("<div/>",{id:'modaltest',class:'col-md-9 col-md-push-3'}).css({'display':'inline-block','float':'left','position':'absolute','z-index': '100', 'top':'60%',"background-color":"#D2D7D3"}).appendTo($(this).parent());
+				$("<h4/>").text(data.items[i].title).appendTo("#modaltest");
+        		$("<p/>").text(data.items[i].author).appendTo($("#modaltest"));
+        		$( "#modaltest" ).effect( "slide", "slow" );
 
+				$(this).parent().css({'z-index':'99'});
         		/* Opacité */
-				$("#bg").css({
+				/*$("#bg").css({
 					'opacity':'0.4',
 				});
 
 				$(".close").click(function() {
 					$("#bg").css('opacity', 1);
 					$( ".mymodal" ).effect( "drop", "slow" );
-				});
+				});*/
 			});
         });
 	})
