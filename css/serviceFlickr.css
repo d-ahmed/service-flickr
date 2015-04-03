@@ -17,6 +17,7 @@
     width: 242px;
     height: 210px;
     overflow: auto;
+    position: relative;
 }
 
 .thumbnail img{
@@ -40,4 +41,7 @@ body {
 	z-index:99;
 }
 
-
+#typeAffiche{
+  width: 100px;
+  height: auto;
+}
