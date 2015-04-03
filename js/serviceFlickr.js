@@ -34,9 +34,7 @@ $(document).ready(function(){
         	$.each(data.items, function(i,item) {
         		$("<div/>",{class:"col-sm-6 col-md-4", id:""+i}).appendTo($(".row"));
         		$("<div/>",{class:"thumbnail"}).appendTo($("#"+i));
-        		$("<img/>", {onclick:"test"}).attr("src", item.media.m).appendTo($("#"+i).find(".thumbnail"));
-        		
-        		
+        		$("<img/>", {onclick:"test"}).attr("src", item.media.m).appendTo($("#"+i).find(".thumbnail"));      		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
             	if ( i == $("#nbPhotos").val()-1) return false;
           });
         });
