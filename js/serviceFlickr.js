@@ -31,16 +31,18 @@ $(document).ready(function(){
         function(data) {
         	console.log(data);
         	$(".col-sm-6").remove();
+
         	$.each(data.items, function(i,item) {
         		$("<div/>",{class:"col-sm-6 col-md-4", id:""+i}).appendTo($(".row"));
         		$("<div/>",{class:"thumbnail"}).appendTo($("#"+i));
-        		$("<img/>", {onclick:"test"}).attr("src", item.media.m).appendTo($("#"+i).find(".thumbnail"));      		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+        		$("<img/>").attr("src", item.media.m).appendTo($("#"+i).find(".thumbnail"));      		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
             	if ( i == $("#nbPhotos").val()-1) return false;
           });
+
+        	$("img").click(function(){
+				alert("fenetre modale");
+			});
         });
 	})
-	function test() {
-    	alert('test');
-    	return true;
-    }
 })
+
