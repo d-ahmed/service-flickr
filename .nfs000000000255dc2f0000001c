@@ -67,7 +67,7 @@
 	<!-- jQuery UI libray -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 	<!-- Javascript -->
-	
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 
 	<script src="js/serviceFlickr.js"></script>
 	

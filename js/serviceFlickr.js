@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	/*$("#commune").autocomplete({
+	$("#commune").autocomplete({
 		minLength:3,
 		source: function(request, response){
 			$.ajax({
@@ -22,7 +22,7 @@ $(document).ready(function(){
 				}
 			})
 		},
-	});*/
+	});
 	
 
 	$('#recherche').submit(function(e) {
@@ -32,12 +32,48 @@ $(document).ready(function(){
         	console.log(data);
         	$(".col-sm-6").remove();
 
-        	$.each(data.items, function(i,item) {
+        	/*$.each(data.items, function(i,item) {
         		$("<div/>",{class:"col-sm-6 col-md-4", id:""+i}).appendTo($(".row"));
         		$("<div/>",{class:"thumbnail"}).appendTo($("#"+i));
         		$("<img/>").attr("src", item.media.m).appendTo($("#"+i).find(".thumbnail"));     		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+            	
             	if ( i == $("#nbPhotos").val()-1) return false;
-         	});
+            	
+         	});*/
+         	var nbPhotos = $("#nbPhotos").val();
+         	var nbPhotosTotal = data.items.length;
+
+            	if (nbPhotosTotal > nbPhotos) {
+            		$(".pages").remove();
+            		$("<nav/>", {class:"pages"}).appendTo($("#bg"));
+            		$("<ul/>", {class:"pagination"}).appendTo($(".pages"));
+            		
+            		if (nbPhotos == 1) {
+            			var nbPages = Math.floor(nbPhotosTotal/nbPhotos);
+            		}
+            		else {
+            			var nbPages = Math.floor(nbPhotosTotal/nbPhotos)+1;
+            		}
+
+            		var debut = 0;
+            		for (var i=0; i<nbPages; i++) {
+            			$("<li/>", {id:"li"+i}).appendTo($(".pagination"));
+            			$("<a/>", {href:"#"}).text(""+(i+1)).appendTo("#li"+i);
+            			$("#li"+i).click(function(){
+            				$(".col-sm-6").remove();
+            				for(var i=debut; i<=debut+nbPhotos; i++) {
+            					$("<div/>",{class:"col-sm-6 col-md-4", id:""+i}).appendTo($(".row"));
+        						$("<div/>",{class:"thumbnail"}).appendTo($("#"+i));
+        						$("<img/>").attr("src", data.items[i].media.m).appendTo($("#"+i).find(".thumbnail"));   
+            				}
+            			});
+            			debut = debut+nbPhotos;
+            		}
+            	}
+
+
+		
+
 
         	$("img").click(function() {
         		/* Création et affichage du modal */

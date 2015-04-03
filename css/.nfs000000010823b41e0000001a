@@ -1,0 +1,42 @@
+/* style pour navbar */
+.mynav {
+	background-color:#22A7F0;
+	border-color:#22A7F0;
+}
+
+.navbar .nav > li > a {
+    color:#d6d6d6;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #d6d6d6;
+}
+
+/* style de l'affichage des images */
+.thumbnail{
+    width: 242px;
+    height: 210px;
+    overflow: auto;
+}
+
+.thumbnail img{
+	width: 240px;
+    height: 200px;
+    overflow: auto;
+}
+
+/* style modal */
+.mymodal {
+	background-color: #D2D7D3;
+	width: 440px;
+    height: 400px;
+    z-index: 100;
+  	position: absolute;
+  	top:20%;
+  	left:35%;
+}  	
+
+body {
+	z-index:99;
+}
+
