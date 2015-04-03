@@ -15,7 +15,7 @@
 /* style de l'affichage des images */
 .thumbnail{
     width: 242px;
-    height: 290px;
+    height: 210px;
     overflow: auto;
 }
 

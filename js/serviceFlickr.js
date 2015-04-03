@@ -35,8 +35,8 @@ $(document).ready(function(){
         		$("<div/>",{class:"col-sm-6 col-md-4", id:""+i}).appendTo($(".row"));
         		$("<div/>",{class:"thumbnail"}).appendTo($("#"+i));
         		$("<img/>", {onclick:"test"}).attr("src", item.media.m).appendTo($("#"+i).find(".thumbnail"));
-        		/*$("<div/>",{class:"caption"}).text(item.title).appendTo($("#"+i).find(".thumbnail"));*/
-        		$("<h4/>").text(item.title).appendTo($("<div/>",{class:"caption"})).appendTo($("#"+i).find(".thumbnail"));
+        		
+        		
             	if ( i == $("#nbPhotos").val()-1) return false;
           });
         });
