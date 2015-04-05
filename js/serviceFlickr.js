@@ -104,7 +104,8 @@ $(document).ready(function() {
         		return;	
         	}
 
-        	if(parseInt($("#nbPhotos").val())==0){
+        	if(parseInt($("#nbPhotos").val())<=0){
+        		$(".pages").remove();
         		swal("Alerte!", "Vous êtes sûr de vous?", "warning")
         		return;
         	}
