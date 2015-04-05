@@ -130,7 +130,6 @@ $(document).ready(function() {
 
 	         	// Pagination
 	            if (nbPhotosTotal > nbPhotos) {
-
 	            	$(".pages").remove();
 	            	$("<nav/>", {class:"pages"}).appendTo($("#bg"));
 	            	$("<ul/>", {class:"pagination"}).appendTo($(".pages"));
@@ -171,9 +170,70 @@ $(document).ready(function() {
 								});
             				}
 
-            				// Effet click
             				$("img").click(function() {
-            					imageClick($(this).parent().parent(),data.items);
+            					i = $(this).parent().parent().attr('id');		
+				        		$(".mymodal").remove();
+
+				        		// La croix
+				        		$("<div/>", {class:"well mymodal"}).appendTo($("#modal"));
+				        		$("<button/>", {type:"button", class:"close"}).appendTo($(".mymodal"));
+				        		$("<span/>", {"aria-hiden":"true"}).html("&times;").appendTo($(".mymodal").find("button"));
+				        		
+				        		// Apparition du modal
+								$( ".mymodal" ).effect("bounce", "slow" );
+								
+				        		// Contenu du modal
+				        		$("<div/>",{class:"thumbnail inmodal"}).appendTo($(".mymodal"));
+				        		$(this).clone().appendTo($(".inmodal"));
+				        		$("<h4/>").text(data.items[i].title).appendTo(".mymodal");
+				        		var author = data.items[i].author.split("(");
+								author = author[1].split(")");
+				        		$("<p/>").html(author[0]+" <a href='#'>(Voir son profil)</a>").appendTo($(".mymodal"));
+				        		$("<p/>").text("Photo prise le "+data.items[i].date_taken).appendTo($(".mymodal"));
+								
+								$("<button/>", {type:"button", class:"btn btn-success btn-lg", id:"like"}).appendTo(".mymodal");
+								$("<span/>", {class:"glyphicon glyphicon-thumbs-up", "aria-hiden":"true"}).appendTo("#like");
+
+								$("<button/>", {type:"button", class:"btn btn-danger btn-lg", id:"dislike"}).appendTo(".mymodal");
+								$("<span/>", {class:"glyphicon glyphicon-thumbs-down", "aria-hiden":"true"}).appendTo("#dislike");
+
+								$("#like").click(function() {
+									$("#like").effect("transfer",{ to: $("#fav")}, 1000);
+									$("#fav").delay(900).effect("highlight", "slow");
+									$(".badge").text(parseInt($(".badge").text())+1+"");
+									$("#like").attr("disabled", "disabled");
+									swal("Super!", "L'image a été rajoutée dans vos favoris!", "success")
+									$(".mymodal").effect("fade", "slow");
+								});	
+
+								$("#dislike").click(function() {
+									swal({
+									  title: "Etes-vous sûr?",
+									  text: "Vous ne pourrez plus ajouter cette image dans vos favoris!",
+									  type: "warning",
+									  showCancelButton: true,
+									  confirmButtonClass: "btn-danger",
+									  confirmButtonText: "Oui! Je n'aime pas cette image!",
+									  cancelButtonText: "Non, je veux annuler mon vote!",
+									  closeOnConfirm: false,
+									  closeOnCancel: false
+									},
+									function(isConfirm) {
+									  if (isConfirm) {
+									    swal("Votre vote a été pris en compte.");
+									  } 
+									  else {
+									    swal("Annulé!", "Votre vote n'a pas été pris en compte :)", "error");
+									  }
+									});
+									$(".mymodal").effect("explode", "slow");
+								});	
+
+								// Fermer le modal
+								$(".close").click(function() {
+									$("#bg").css('opacity', 1);
+									$(".mymodal").effect("fade", "slow");
+								});
 							}); // fin image on click
 	            		}); // fin li on click
 	            	} // fin remplissable d'images		
@@ -341,70 +401,3 @@ $(document).ready(function() {
 	});
 
 })
-
-
-function imageClick(img,dataItem){
-	i = img.attr('id');		
-				        		$(".mymodal").remove();
-
-				        		// La croix
-				        		$("<div/>", {class:"well mymodal"}).appendTo($("#modal"));
-				        		$("<button/>", {type:"button", class:"close"}).appendTo($(".mymodal"));
-				        		$("<span/>", {"aria-hiden":"true"}).html("&times;").appendTo($(".mymodal").find("button"));
-				        		
-				        		// Apparition du modal
-								$( ".mymodal" ).effect("bounce", "slow" );
-								
-				        		// Contenu du modal
-				        		$("<div/>",{class:"thumbnail inmodal"}).appendTo($(".mymodal"));
-				        		img.clone().appendTo($(".inmodal"));
-				        		$("<h4/>").text(dataItem.title).appendTo(".mymodal");
-				        		var author = dataItem.author.split("(");
-								author = author[1].split(")");
-				        		$("<p/>").html(author[0]+" <a href='#'>(Voir son profil)</a>").appendTo($(".mymodal"));
-				        		$("<p/>").text("Photo prise le "+dataItem[i].date_taken).appendTo($(".mymodal"));
-								
-								$("<button/>", {type:"button", class:"btn btn-success btn-lg", id:"like"}).appendTo(".mymodal");
-								$("<span/>", {class:"glyphicon glyphicon-thumbs-up", "aria-hiden":"true"}).appendTo("#like");
-
-								$("<button/>", {type:"button", class:"btn btn-danger btn-lg", id:"dislike"}).appendTo(".mymodal");
-								$("<span/>", {class:"glyphicon glyphicon-thumbs-down", "aria-hiden":"true"}).appendTo("#dislike");
-
-								$("#like").click(function() {
-									$("#like").effect("transfer",{ to: $("#fav")}, 1000);
-									$("#fav").delay(900).effect("highlight", "slow");
-									$(".badge").text(parseInt($(".badge").text())+1+"");
-									$("#like").attr("disabled", "disabled");
-									swal("Super!", "L'image a été rajoutée dans vos favoris!", "success")
-									$(".mymodal").effect("fade", "slow");
-								});	
-
-								$("#dislike").click(function() {
-									swal({
-									  title: "Etes-vous sûr?",
-									  text: "Vous ne pourrez plus ajouter cette image dans vos favoris!",
-									  type: "warning",
-									  showCancelButton: true,
-									  confirmButtonClass: "btn-danger",
-									  confirmButtonText: "Oui! Je n'aime pas cette image!",
-									  cancelButtonText: "Non, je veux annuler mon vote!",
-									  closeOnConfirm: false,
-									  closeOnCancel: false
-									},
-									function(isConfirm) {
-									  if (isConfirm) {
-									    swal("Votre vote a été pris en compte.");
-									  } 
-									  else {
-									    swal("Annulé!", "Votre vote n'a pas été pris en compte :)", "error");
-									  }
-									});
-									$(".mymodal").effect("explode", "slow");
-								});	
-
-								// Fermer le modal
-								$(".close").click(function() {
-									$("#bg").css('opacity', 1);
-									$(".mymodal").effect("fade", "slow");
-								});
-}
