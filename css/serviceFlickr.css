@@ -14,34 +14,68 @@
 
 /* style de l'affichage des images */
 .thumbnail{
-    width: 242px;
-    height: 210px;
-    overflow: auto;
-    position: relative;
+  width: 242px;
+  height: 210px;
+  overflow: auto;
+  position: relative;
 }
 
 .thumbnail img{
 	width: 240px;
-    height: 200px;
-    overflow: auto;
+  height: 200px;
+  overflow: auto;
 }
 
 /* style modal */
 .mymodal {
-	background-color: #D2D7D3;
 	width: 440px;
-    height: 400px;
-    z-index: 100;
-  	position: absolute;
-  	top:20%;
-  	left:35%;
+  height: 440px;
+  z-index: 100;
+  position: fixed;
+  top:20%;
+  left:40%;
 }  	
 
-body {
-	z-index:99;
+.mymodalconnexion {
+  width: 440px;
+  height: 400px;
+  position: fixed;
+  top:20%;
+  left:40%;
 }
 
 #typeAffiche{
   width: 100px;
   height: auto;
 }
+
+.ui-effects-transfer { 
+  border: 2px dotted gray; 
+}
+
+
+header,
+body
+{
+  /*background-color: blue;*/
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+
+footer {
+
+position: fixed;
+
+height: 60px;
+
+bottom: 0;
+
+width: 100%;
+
+background-color: #22A7F0;
+
+
+}
+

@@ -9,7 +9,12 @@
 		<link type="text/css" rel="stylesheet" href="path/widget/css/rcarousel.css" />
 		<link rel="stylesheet" href="css/serviceFlickr.css">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<link rel="stylesheet" type="text/css" href="css/jcarousel.responsive.css">
+		<link rel="stylesheet" type="text/css" href="external/slick/slick.css"/>
+		<link rel="stylesheet" type="text/css" href="external/slick/slick-theme.css"/>
+		<link rel="stylesheet" type="text/css" href="css/sweet-alert.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-social.css">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
@@ -32,9 +37,9 @@
 					<div class="navbar-collapse collapse" style="height: 1px;">
 							<ul class="nav navbar-nav navbar-right">
 								<li>
-									<a class="nav-link" href="#">Favoris</a>
+									<a id="fav" class="nav-link" href="#">Favoris <span class="badge">0</span></a>
 								</li>
-								<a class="btn btn-danger navbar-btn" href="#" role="button">Se connecter</a>
+								<a id="connexion" class="btn btn-danger navbar-btn" href="#" role="button">Se connecter</a>
 							</ul>
 					</div>		
 				</div>
@@ -42,66 +47,64 @@
 		</header>
 
 		
-			<form class="form-vertical col-md-3" role="form" id="recherche">
-			    <div class="form-group">
-			      	<input type="text" class="form-control input-xs" placeholder="Nom de commune" id="commune">	
-			    </div>
-			    <div class="form-group">
-			    	<label class="nnbPhotos" for="nbPhotos">Nombre de photos à afficher : </label>
-			    	<input type="number" class="form-control input-xs" id="nbPhotos" class="nnbPhotos">
-			    	<label for="files">Trier par : </label>
-			    	<select id="tri" class="form-control input-xs">
-					<optgroup label="Auteur">
-						<option value="auteur_az">Auteur : A-Z</option>
-						<option value="auteur_za">Auteur : Z-A</option>
-					</optgroup>
-					<optgroup label="Nom photo">
-						<option value="photo_az">Nom photo : A-Z</option>
-						<option value="photo_za">Nom photo : Z-A</option>
-					</optgroup>
-					<optgroup label="Date de publication">
-						<option value="recent">Plus récents</option>
-						<option value="ancien">Moins récents</option>
-					</optgroup>
-				</select>
-					<label for="date">Date: </label><input type="text" class="form-control input-xs" id="datepicker"></p>
-
-					<button id="typeAffiche" type="button" class="btn btn-primary btn-lg sharp"><img id="list" src="img/list.png"></img></button>
-					<br/>
-					<br/>
-			    	<button class="btn btn-info" type="submit">Chercher</button>
-			    </div>
-				
-
-				<!-- Tri -->
-				
-			</form>
+		<form class="form-vertical col-md-3" role="form" id="recherche">
+			<div class="form-group">
+			  	<input type="text" class="form-control input-xs" placeholder="Nom de commune" id="commune">	
+			</div>
+			<div class="form-group">
+			  	<label class="nnbPhotos" for="nbPhotos">Nombre de photo par page : </label>
+			   	<input type="number" class="form-control input-xs" id="nbPhotos" class="nnbPhotos">
+			   	<label for="files">Trier par : </label>
+			   	<select id="tri" class="form-control input-xs">
+				<optgroup label="Auteur">
+					<option value="auteur_az">Auteur : A-Z</option>
+					<option value="auteur_za">Auteur : Z-A</option>
+				</optgroup>
+				<optgroup label="Nom photo">
+					<option value="photo_az">Nom photo : A-Z</option>
+					<option value="photo_za">Nom photo : Z-A</option>
+				</optgroup>
+				<optgroup label="Date de publication">
+					<option value="recent">Plus récents</option>
+					<option value="ancien">Moins récents</option>
+				</optgroup>
+			</select>
+			<label for="date">A partir d'une date : </label><input type="text" class="form-control input-xs" id="datepicker" placeholder="mm/jj/aaaa"></p>
+				<button id="typeAffiche" type="button" class="btn btn-default sharp"><img id="list" src="img/list.png"></img></button>
+					<br>
+					<br>
+			    <button class="btn btn-info" type="submit">Chercher</button>
+			    </div>	
+			</form>			
 		
-
+		<!-- Container -->
 		<div class="container documents col-md-9">	
 			<center id="bg">	
-				<div class="row">
-					<!--<div class="wapper"><div class="jcarousel-wrapper"><div class="jcarousel"><ul id="carouselUl"><li><img src="http://farm8.staticflickr.com/7588/16816156227_ac36739b8d_m.jpg" alt="1"></li><li><img src="http://farm8.staticflickr.com/7655/16403413193_053c41d99a_m.jpg" alt="2"></li><li><img src="http://farm8.staticflickr.com/7610/16837349999_e8acca99d4_m.jpg" alt="3"></li><li><img src="http://farm9.staticflickr.com/8697/17023557295_1d1b78e793_m.jpg" alt="4"></li><li><img src="http://farm9.staticflickr.com/8740/16403413143_083b9ce815_m.jpg" alt="5"></li><li><img src="http://farm8.staticflickr.com/7649/16401133694_3a2ac566f4_m.jpg" alt="6"></li><li><img src="http://farm9.staticflickr.com/8708/16837339839_c169aa955b_m.jpg" alt="7"></li><li><img src="http://farm8.staticflickr.com/7613/16997569506_7fef462676_m.jpg" alt="8"></li><li><img src="http://farm9.staticflickr.com/8711/16816156407_2995e18cdd_m.jpg" alt="9"></li><li><img src="http://farm9.staticflickr.com/8740/16401133854_7b6be653b8_m.jpg" alt="10"></li><li><img src="http://farm8.staticflickr.com/7586/16837350329_9e7f341f79_m.jpg" alt="11"></li><li><img src="http://farm9.staticflickr.com/8718/17022119222_2754b8fc16_m.jpg" alt="12"></li><li><img src="http://farm9.staticflickr.com/8690/16997569876_142b600d31_m.jpg" alt="13"></li><li><img src="http://farm9.staticflickr.com/8750/16835791258_ca46067e31_m.jpg" alt="14"></li><li><img src="http://farm9.staticflickr.com/8754/16403412813_09574fc70e_m.jpg" alt="15"></li><li><img src="http://farm9.staticflickr.com/8694/16816156767_5e76a5f5bc_m.jpg" alt="16"></li><li><img src="http://farm9.staticflickr.com/8748/16401133704_23a5568d08_m.jpg" alt="17"></li><li><img src="http://farm9.staticflickr.com/8718/16997569736_98988ff7a6_m.jpg" alt="18"></li><li><img src="http://farm9.staticflickr.com/8742/17022118362_35b8fc8df1_m.jpg" alt="19"></li><li><img src="http://farm8.staticflickr.com/7633/16836031510_e115f3aa77_m.jpg" alt="20"></li></ul></div><a class="jcarousel-control-prev" href="#">‹</a><a class="jcarousel-control-next" href="#">›</a><p class="jcarousel-wrapper"></p></div></div>-->
-				</div>	
-				
+				<div class="row"></div>		
 			</center>
-			
 			<center id="modal"></center>
 		</div>	
 
-		<div class="footer"></div>
-	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<!-- Footer -->
+		<!--<footer class="footer">
+			<div class="container">
+				
+			</div>
+		</footer>-->
+		
 
-	<!-- jQuery UI libray -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
-	<!-- Javascript -->
-	
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-	
-	
-	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	<script src="js/serviceFlickr.js"></script>
+		<!-- jQuery UI libray -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+		<!-- Javascript -->	
+		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+		<script src="js/serviceFlickr.js"></script>
+		<script src="js/sweet-alert.min.js"></script>
 	</body>
 </html>
+
+
+
