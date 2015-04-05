@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	/*$("#commune").autocomplete({
+	$("#commune").autocomplete({
 		minLength:3,
 		source: function(request, response){
 			$.ajax( {
@@ -22,7 +22,7 @@ $(document).ready(function() {
 				}
 			})
 		},
-	});*/
+	});
 	
 
 	$('#recherche').submit(function(e){
