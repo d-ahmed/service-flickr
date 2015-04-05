@@ -31,6 +31,7 @@ $(document).ready(function() {
         function(data) {
         	// Enlever les images déjà présentes
         	$(".col-sm-6").remove();
+        	$(".carousel").remove();
 
         	// Tri par nom d'auteur A-Z
         	if ($("#tri").val() == "auteur_az") {
